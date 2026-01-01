@@ -42,6 +42,20 @@ func NewBasePagerModel(common *CommonModel, title string) BasePagerModel {
 	return model
 }
 
+func NewBasePagerModelWithStatus(common *CommonModel, title string, message string) BasePagerModel {
+	model := BasePagerModel{
+		Common:        common,
+		Title:         title,
+		Ready:         false,
+		State:         PagerStateBrowse,
+		StatusMessage: message,
+		Content:       "   ",
+	}
+
+	model.SetSize(common.Width, common.Height)
+	return model
+}
+
 func (m BasePagerModel) Init() tea.Cmd {
 	return nil
 }
@@ -171,6 +185,8 @@ func (m *BasePagerModel) StatusBarView() string {
 		note = m.StatusMessage
 	} else if m.Content == "" {
 		note = "Press 'v' to paste"
+	} else {
+		note = m.StatusMessage
 	}
 
 	note = truncate.StringWithTail(" "+note+" ", uint(max(0,

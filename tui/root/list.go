@@ -16,6 +16,7 @@ import (
 	"github.com/skatkov/devtui/internal/ui"
 	base64decoder "github.com/skatkov/devtui/tui/base64-decoder"
 	base64encoder "github.com/skatkov/devtui/tui/base64-encoder"
+	"github.com/skatkov/devtui/tui/cpf"
 	cron "github.com/skatkov/devtui/tui/cron"
 	"github.com/skatkov/devtui/tui/css"
 	"github.com/skatkov/devtui/tui/csv2md"
@@ -24,7 +25,6 @@ import (
 	"github.com/skatkov/devtui/tui/html"
 	"github.com/skatkov/devtui/tui/iban"
 	js "github.com/skatkov/devtui/tui/json"
-	"github.com/skatkov/devtui/tui/json2toon"
 	"github.com/skatkov/devtui/tui/jsonrepair"
 	"github.com/skatkov/devtui/tui/jsonstruct"
 	"github.com/skatkov/devtui/tui/jsontoml"
@@ -170,11 +170,11 @@ func getMenuOptions(common *ui.CommonModel) []MenuOption {
 			title: jsontoml.Title,
 			model: func() tea.Model { return jsontoml.NewJsonTomlModel(common) },
 		},
-		{
-			id:    "json2toon",
-			title: json2toon.Title,
-			model: func() tea.Model { return json2toon.NewJsonToonModel(common) },
-		},
+		// {
+		// 	id:    "json2toon",
+		// 	title: json2toon.Title,
+		// 	model: func() tea.Model { return json2toon.NewJsonToonModel(common) },
+		// },
 		{
 			id:    "toml",
 			title: toml.Title,
@@ -219,6 +219,11 @@ func getMenuOptions(common *ui.CommonModel) []MenuOption {
 			id:    "jsonrepair",
 			title: jsonrepair.Title,
 			model: func() tea.Model { return jsonrepair.NewJSONRepairModel(common) },
+		},
+		{
+			id:    "cpf",
+			title: cpf.Title,
+			model: func() tea.Model { return cpf.NewCPFGeneratorModel(common) },
 		},
 	}
 }
